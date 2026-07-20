@@ -1,0 +1,7 @@
+version: 0.1
+
+jobs:
+  ruby-app-check:
+    steps:
+    - run: |
+        bundle exec ruby -e 'require "rack"; Rack::Builder.parse_file("config.ru"); puts "application loaded"'
