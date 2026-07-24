@@ -1,7 +1,9 @@
 version: 0.1
 
 jobs:
-  ruby-app-check:
+  ruby-http-check:
     steps:
     - run: |
-        bundle exec ruby -e 'require "rack"; Rack::Builder.parse_file("config.ru"); puts "application loaded"'
+        curl --fail --show-error --silent --retry 5 --retry-all-errors --retry-delay 2 \
+          --retry-connrefused \
+          "http://${WODBY_APP_SERVICE_NAME}:8080/healthz"
